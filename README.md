@@ -9,3 +9,9 @@ Tata cara untuk membuka file ini:
 4. edit package.json
 5. edit config.json sesuai dengan database yang kamu gunakan
 6. npm run dev
+
+buka browser dengan menuliskan url:
+localhost:postkamu/dashboard/admin (maka akan membuka ui dashboard)
+jika menambahkan /dashboard/admin/create (maka akan membuka ui untuk membuat data baru)
+jika menambahkan /dashboard/admin/edit atau memencet tombol edit maka akan mengedit data
+jika memencet tombol hapus maka akan menghapus data data

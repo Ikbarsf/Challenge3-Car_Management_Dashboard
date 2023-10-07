@@ -1,10 +1,11 @@
 const { car } = require("../models")
+const imagekit = require("../lib/imagekit")
 
 const getAllCars = async (req, res) => {
   try {
     const Cars = await car.findAll()
     res.status(200).json({
-      status: "success",
+      status: "Success",
       data: {
         Cars,
       },
@@ -40,12 +41,28 @@ const getCarById = async (req, res) => {
 }
 
 const createCar = async (req, res) => {
-  const { name, price, category } = req.body
+  const { name, price, category, description } =
+    req.body
+  const file = req.file
+
+  console.log(file)
+
   try {
+    //dapatkan extension filenya
+    const split = file.originalname.split(`.`)
+    const extension = split[split.length - 1]
+    //upload file ke imagekit
+    const img = await imagekit.upload({
+      file: file.buffer,
+      fileName: `IMG-${Date.now()}.${extension}`,
+    })
+
     const newCar = await car.create({
       name,
       price,
       category,
+      description,
+      imageUrl: img.url,
     })
 
     res.status(200).json({
@@ -63,13 +80,29 @@ const createCar = async (req, res) => {
 }
 
 const updateCar = async (req, res) => {
-  const { name, price, category } = req.body
+  const { name, price, category, description } =
+    req.body
+  const file = req.file
+
+  console.log(file)
+
   try {
+    //dapatkan extension filenya
+    const split = file.originalname.split(`.`)
+    const extension = split[split.length - 1]
+    //upload file ke imagekit
+    const img = await imagekit.upload({
+      file: file.buffer,
+      fileName: `IMG-${Date.now()}.${extension}`,
+    })
+
     const Cars = await car.update(
       {
         name,
         price,
         category,
+        description,
+        imageUrl: img.url,
       },
       {
         where: {

@@ -44,6 +44,7 @@ const createCar = async (req, res) => {
   const { name, price, category, description } =
     req.body
   const file = req.file
+  console.log(req.body)
 
   console.log(file)
 
@@ -83,6 +84,7 @@ const updateCar = async (req, res) => {
   const { name, price, category, description } =
     req.body
   const file = req.file
+  console.log(req.body)
 
   console.log(file)
 
